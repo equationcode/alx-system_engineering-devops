@@ -1,5 +1,5 @@
 #!/usr/bin/env bash
-# This script that displays the time for 12 hours and 59 minutes
+#nested loop stuff
 
 hours=0
 minutes=1
