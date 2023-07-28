@@ -1,4 +1,5 @@
 #!/usr/bin/env bash
+# This script displays RSA KEY Public.
 
 "rsa-key-20230727"
 AAAAB3NzaC1yc2EAAAADAQABAAABAQCXHpFNuR9Vt1oR8V0XjNUvSnDY012Y4BnX
