@@ -1,6 +1,5 @@
 #!/usr/bin/env bash
-# This script displays the content of the file /etc/passwd
-displaying username, user ID & home directory path for the user.
+# This script displays the content of the file /etc/passwd.
 
 while read -r name
 do
