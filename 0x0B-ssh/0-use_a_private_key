@@ -1,0 +1,3 @@
+#!/usr/bin/env bash
+# Script that uses ssh to connect to server using the private key with the user ubuntu
+ssh -1 ~/.ssh/school -0 "PasswordAuthentication no"  ubuntu
