@@ -1,3 +1,19 @@
+#   RSAAuthentication no
+#   RSAAuthentication yes
+#   HostbaseAuthentication no
+#   CheckHostIP yes
+#   ConnectTimeout 0
+#   StrictHostKeyChecking ask
+#   IdentityFile ~/.ssh/identity
+#   IdentityFile ~/.ssh/id_rsa
+#   IdentityFile ~/.ssh/id_dsa
+#   IdentityFile ~/.ssh/id_ecdsa
+#   IdentityFile ~/.ssh/id_ed25519
+#   Port 22
+#   Protocol 2
+
 IdentityFile ~/.ssh/school
 PasswordAuthentication no
 PubkeyAuthentication yes
+SendEnv LANG LC_*
+HashKnownHosts yes
