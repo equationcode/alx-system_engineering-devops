@@ -1,27 +1,17 @@
 #!/usr/bin/env bash
 # Script that will display information about subdomains.
-# Fetches information of the subdomains.
-# 	Usage: fetch_subdomains domain subdomains
-fetch_subdomains() {
-	domain="$1"
-	subdomains=()
-	readarray -t subdomains < <(echo "$2" | tr ' ' '\n')
-	for ((i = 0; i < "${#subdomains[@]}"; i++)) do
-		subdomain="${subdomains[i]}"
-		output_awk='{print "The subdomain", "'
-		output_awk="$output_awk$subdomain is a"
-		output_awk="$output_awk\", \$7, \"record and points to\", \$8}"
-		dig "$subdomain.$domain" \
-			| grep -A1 'ANSWER SECTION:' \
-			| tr '\n' ' ' \
-			| awk "$output_awk"
-	done
-}
-
-if [ "${#BASH_ARGV[@]}" -ge '2' ]; then
-	fetch_subdomains "$1" "$2"
-elif [ "${#BASH_ARGV[@]}" -ge '1' ]; then
-	fetch_subdomains "$1" "www lb-01 web-01 web-02"
-else
-	exit
-fi
+domain_info () {
+		SUB_DOMAIN="$2"
+			RECORD_TYPE=$(dig "$1" | awk '/[0-9]+\.[0-9]+\.[0-9]+\.[0-9]+$/ {print $4}')
+				DESTINATION=$(dig "$1" | awk '/[0-9]+\.[0-9]+\.[0-9]+\.[0-9]+$/ {print $5}')
+					echo "The subdomain ${SUB_DOMAIN} is a ${RECORD_TYPE} record and points to ${DESTINATION}"
+				}
+			if [ "$#" -eq 1 ]
+			then
+				    domain_info "www.${1}" "www"
+				        domain_info "lb-01.${1}" "lb-01"
+					    domain_info "web-01.${1}" "web-01"
+					        domain_info "web-02.${1}" "web-02"
+					else
+						    domain_info "$2.$1" "$2"
+			fi
