@@ -1,0 +1,29 @@
+Issue Summary
+
+In my company, we had just released a new feature to our recently launched website on the web, but unfortunately we had some of our users complaining about the site. After some time, our company had to performed a feature update, and after the update, that when we started receiving another serious complain that they cannot have access into our site. To us, it was quite confusing because the site initially worked. Nevertheless, we still need to find solution to the problem as we cannot afford to loss our numerous customers. After all that we could do to resolve the issue and still could not work, we had to consult some professionals in the field and tried to initial another update but all effort seems not working. It wasn't long before we realized that the cause of the problem was failing to update some requirements for the site. The site actually malfunctioned from 6:10AM GMT+1 to 01:15PM GMT+1.
+
+
+Timeline:
+
+01/11/2023 07:20AM GMT+1 - A customer complained that they couldn't sign in to the application.
+01/11/2023 11:12AM GMT+1 - One of my colleague experienced the same the issue.
+01/11/2023 11:35AM GMT+1 - We had to start a serous investigation with the controllers and the views for inconsistencies.
+01/11/2023 12:30PM GMT+1 - We assumed that one of the site dependance gem being used was either at fault or used incorrectly because the error message on the site showed that the bcrypt gem was raising an error over an invalid hash.
+01/11/2023 12:42PM GMT+1 - We checked that the views might not be binding the form fields to the right model fields, which later turned out to be false.
+01/11/2023 12:50PM GMT+1 - We were misled by thinking that our controllers might be creating a different hash for a valid password of the site's admin.
+01/11/2023 12:55PM GMT+1 - My colleague thought the issue might have been that the password was not properly hashed.
+01/11/2023 12:58PM GMT+1 - The incident was escalated to the backend development team.
+01/11/2023 01:10PM GMT+1 - The incident was resolved by updating the requirements (the bcrypt gem version) for the backend server.
+
+
+
+Root Cause And Resolution:
+
+The version of the bcrypt gem we used was outdated and we did not notice on time. It was raising an error over a hash that was clearly valid and matched what was stored in the database. It could be that the hash we were creating was not supported by the version of bcrypt we had installed. The issue was fixed by manually updating the version of bcrypt in the Gemfile.lock file to a more recent version and reinstalling the required gems, and it worked.
+
+
+Corrective And Preventative Measures:
+
+Setup a monitoring system for the database and application servers to keep track of any issue that may occur.
+Setup a continuous integration pipeline to run a build on each pull request branch. This would ensure that builds are passing in the pull request branch before it is merged with the deployment branch.
+Develop tests that need to be passed for each new feature and those tests should be passing before they are merged with the deployment branch.
